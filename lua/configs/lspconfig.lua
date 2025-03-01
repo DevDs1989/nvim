@@ -12,6 +12,12 @@ lspconfig.servers = {
     -- "hls",
     -- "ols",
     "pyright",
+    "html",
+    "cssls",
+    "typescript-language-server",
+    "tailwindcss-language-server",
+    "eslint",
+    "prettier",
 }
 
 -- list of servers configured with default config.
@@ -28,7 +34,6 @@ for _, lsp in ipairs(default_servers) do
         capabilities = capabilities,
     })
 end
---
 lspconfig.clangd.setup({
     on_attach = function(client, bufnr)
         client.server_capabilities.documentFormattingProvider = false
@@ -97,4 +102,10 @@ lspconfig.lua_ls.setup({
             },
         },
     },
+})
+
+lspconfig.tsserver.setup({
+    on_attach = on_attach,
+    on_init = on_init,
+    capabilities = capabilities,
 })
