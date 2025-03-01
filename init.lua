@@ -16,6 +16,10 @@ if not vim.loop.fs_stat(lazypath) then
     })
 end
 
+vim.api.nvim_create_autocmd("BufEnter", {
+    pattern = "*",
+    command = "lcd %:p:h",
+})
 vim.opt.rtp:prepend(lazypath)
 
 local lazy_config = require("configs.lazy")

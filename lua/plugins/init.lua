@@ -1,5 +1,27 @@
 return {
-
+    { -- This plugin
+        "Zeioth/compiler.nvim",
+        cmd = { "CompilerOpen", "CompilerToggleResults", "CompilerRedo" },
+        dependencies = {
+            "stevearc/overseer.nvim",
+            "nvim-telescope/telescope.nvim",
+        },
+        opts = {},
+    },
+    { -- The task runner we use
+        "stevearc/overseer.nvim",
+        commit = "6271cab7ccc4ca840faa93f54440ffae3a3918bd",
+        cmd = { "CompilerOpen", "CompilerToggleResults", "CompilerRedo" },
+        opts = {
+            task_list = {
+                direction = "bottom",
+                min_height = 25,
+                max_height = 25,
+                default_detail = 1,
+            },
+        },
+    },
+    { "CRAG666/code_runner.nvim", config = true },
     {
         "nvim-treesitter/nvim-treesitter",
         event = { "BufReadPre", "BufNewFile" },
@@ -125,4 +147,56 @@ return {
     --         require("alpha").setup(require("alpha.themes.dashboard").config)
     --     end,
     -- },
+    {
+        "CRAG666/code_runner.nvim",
+        config = function()
+            require("code_runner").setup({
+                filetype = {
+                    java = {
+                        "cd $dir &&",
+                        "javac $fileName &&",
+                        "java $fileNameWithoutExt",
+                    },
+                    python = "python3 -u",
+                    typescript = "deno run",
+                    rust = {
+                        "cd $dir &&",
+                        "rustc $fileName &&",
+                        "$dir/$fileNameWithoutExt",
+                    },
+                    c = function(...)
+                        c_base = {
+                            "cd $dir &&",
+                            "gcc $dir/$fileName -o",
+                            "$dir/$fileNameWithoutExt",
+                        }
+                        local c_exec = {
+                            "&& %dir/$fileNameWithoutExt &&",
+                            "rm $dir/$fileNameWithoutExt",
+                        }
+                        vim.ui.input(
+                            { prompt = "Add more args:" },
+                            function(input)
+                                c_base[4] = input
+                                vim.print(
+                                    vim.tbl_extend("force", c_base, c_exec)
+                                )
+                                require("code_runner.commands").run_from_fn(
+                                    vim.list_extend(c_base, c_exec)
+                                )
+                            end
+                        )
+                    end,
+                },
+            })
+        end,
+        event = "VeryLazy",
+    },
+    {
+        "CRAG666/betterTerm.nvim",
+        opts = {
+            position = "bot",
+            size = 15,
+        },
+    },
 }
