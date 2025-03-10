@@ -21,6 +21,7 @@ return {
             },
         },
     },
+
     { "CRAG666/code_runner.nvim", config = true },
     {
         "nvim-treesitter/nvim-treesitter",
@@ -198,5 +199,23 @@ return {
             position = "bot",
             size = 15,
         },
+    },
+    { "mattn/emmet-vim" },
+    {
+        "luckasRanarison/tailwind-tools.nvim",
+        name = "tailwind-tools",
+        build = ":UpdateRemotePlugins",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-telescope/telescope.nvim", -- optional
+            "neovim/nvim-lspconfig", -- optional
+        },
+        opts = {}, -- your configuration
+    },
+    {
+        "Toprun123/PicVim",
+        config = function()
+            require("picvim").setup()
+        end,
     },
 }
