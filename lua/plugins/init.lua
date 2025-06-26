@@ -1,4 +1,5 @@
 return {
+    { "JoosepAlviste/nvim-ts-context-commentstring" },
     { -- This plugin
         "Zeioth/compiler.nvim",
         cmd = { "CompilerOpen", "CompilerToggleResults", "CompilerRedo" },
@@ -21,7 +22,14 @@ return {
             },
         },
     },
-
+    {
+        "kevinhwang91/nvim-ufo",
+        dependencies = {
+            "kevinhwang91/promise-async",
+            "nvim-treesitter/nvim-treesitter",
+        },
+        event = "VeryLazy",
+    },
     { "CRAG666/code_runner.nvim", config = true },
     {
         "nvim-treesitter/nvim-treesitter",
@@ -200,10 +208,21 @@ return {
             size = 15,
         },
     },
-    { "mattn/emmet-vim" },
+
+    {
+        "laytan/tailwind-sorter.nvim",
+        event = "BufReadPre",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-lua/plenary.nvim",
+        },
+        build = "cd formatter && npm ci && npm run build",
+        config = true,
+    },
     {
         "luckasRanarison/tailwind-tools.nvim",
         name = "tailwind-tools",
+        lazy = false,
         build = ":UpdateRemotePlugins",
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
@@ -213,9 +232,14 @@ return {
         opts = {}, -- your configuration
     },
     {
-        "Toprun123/PicVim",
-        config = function()
-            require("picvim").setup()
-        end,
+        "NvChad/nvim-colorizer.lua",
+        opts = {
+            user_default_options = {
+                names = false,
+                mode = "background",
+                tailwind = true,
+                sass = { enable = true, parsers = { "css" } },
+            },
+        },
     },
 }

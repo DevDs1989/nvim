@@ -17,6 +17,8 @@ lspconfig.servers = {
     "ts_ls",
     "tailwindcss",
     "eslint",
+    "html",
+    "emmet_language_server",
 }
 
 -- list of servers configured with default config.
@@ -34,6 +36,31 @@ for _, lsp in ipairs(default_servers) do
     })
 end
 
+lspconfig.tailwindcss.setup({
+    cmd = { "tailwindcss-language-server", "--stdio" },
+    on_attach = on_attach,
+    on_init = on_init,
+    capabilities = capabilities,
+    filetypes = {
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "html",
+        "css",
+        "scss",
+        "less",
+        "vue",
+        "svelte",
+    },
+    root_dir = lspconfig.util.root_pattern(
+        "tailwind.config.js",
+        "tailwind.config.ts",
+        "postcss.config.js",
+        ".git"
+    ),
+})
+
 lspconfig.emmet_language_server.setup({
     filetypes = {
         "css",
@@ -45,6 +72,7 @@ lspconfig.emmet_language_server.setup({
         "sass",
         "scss",
         "pug",
+        "typescript",
         "typescriptreact",
     },
     -- Read more about this options in the [vscode docs](https://code.visualstudio.com/docs/editor/emmet#_emmet-configuration).
@@ -155,6 +183,9 @@ lspconfig.eslint.setup({
         "typescript",
         "typescriptreact",
         "html",
+    },
+    settings = {
+        workingDirectory = { mode = "auto" },
     },
 })
 lspconfig.clangd.setup({
