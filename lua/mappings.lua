@@ -3,7 +3,6 @@ require("nvchad.mappings")
 -- add yours here
 
 local map = vim.keymap.set
-
 map("n", ";", ":", { desc = "CMD enter command mode" })
 -- map("i", "jk", "<ESC>")
 map("n", "<leader>rr", ":RunCode<CR>", { noremap = true, silent = false })
@@ -20,7 +19,3 @@ map("n", "<leader>crp", ":CRProjects<CR>", { noremap = true, silent = false })
 -- map({ "n" }, "<leader>tt", betterTerm.select, { desc = "Select terminal" })
 -- Create new term
 local current = 2
-map({ "n" }, "<leader>tn", function()
-    betterTerm.open(current)
-    current = current + 1
-end, { desc = "New terminal" })
