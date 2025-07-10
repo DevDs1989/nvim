@@ -17,8 +17,8 @@ local options = {
         ["clang-format"] = {
             prepend_args = {
                 "-style={ \
-                        IndentWidth: 2, \
-                        TabWidth: 2, \
+                        IndentWidth: 4, \
+                        TabWidth: 4, \
                         UseTab: Never, \
                         AccessModifierOffset: 0, \
                         IndentAccessModifiers: true, \

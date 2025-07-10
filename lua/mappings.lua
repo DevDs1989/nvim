@@ -39,3 +39,5 @@ map(
     ":UndotreeToggle<CR>",
     { noremap = true, silent = true, desc = "Toggle undotree" }
 )
+
+-- toggle quickfix
