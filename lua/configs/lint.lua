@@ -4,8 +4,18 @@ lint.linters_by_ft = {
     lua = { "luacheck" },
     -- haskell = { "hlint" },
     python = { "pylint" },
-    -- c = { "cpplint" }, -- Add cpplint for C files
+    c = { "cpplint" }, -- Add cpplint for C files
     cpp = { "cpplint" }, -- Add cpplint for C++ files
+    javascript = { "eslint" },
+    typescript = { "eslint" },
+    javascriptreact = { "eslint" },
+    typescriptreact = { "eslint" },
+    html = { "eslint" },
+    css = { "stylelint" },
+    scss = { "stylelint" },
+    json = { "jsonlint" },
+    yaml = { "yamllint" },
+    markdown = { "markdownlint" },
 }
 
 lint.linters.luacheck.args = {
